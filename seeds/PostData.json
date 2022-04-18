@@ -1,0 +1,42 @@
+[
+  {
+    "headline": "Headline about MySQL",
+    "body": "This is a post about MySQL.",
+    "posted_by_user_id": 1
+  },
+  {
+    "headline": "Headline about jQuery",
+    "body": "This is a post about jQuery.",
+    "posted_by_user_id": 1
+  },
+  {
+    "headline": "Headline about NodeJS",
+    "body": "This is a post about NodeJS.",
+    "posted_by_user_id": 2
+  },
+  {
+    "headline": "Headline about Sequelize",
+    "body": "This is a post about Sequelize.",
+    "posted_by_user_id": 2
+  },
+  {
+    "headline": "Headline about Handlebars",
+    "body": "This is a post about Handlebars.",
+    "posted_by_user_id": 3
+  },
+  {
+    "headline": "Headline about BootStrap",
+    "body": "This is a post about Bootstrap.",
+    "posted_by_user_id": 3
+  },
+  {
+    "headline": "Headline about JASS",
+    "body": "This is a post about JASS.",
+    "posted_by_user_id": 4
+  },
+  {
+    "headline": "Headline about CSS",
+    "body": "This is a post about CSS.",
+    "posted_by_user_id": 4
+  }
+]
