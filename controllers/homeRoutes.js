@@ -2,6 +2,41 @@ const router = require('express').Router();
 const { User, Post } = require('../models');
 const withAuth = require('../utils/auth');
 
+router.get('/', async (req, res) => {
+  try {
+    
+    res.render('landingpage', {
+      logged_in: req.session.logged_in
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/theblog', async (req, res) => {
+  try {
+    // Get all movies and JOIN with user data
+    const PostData = await Post.findAll({
+      include: [
+        {
+          model: {Post},
+          attributes: ['headline', 'body', 'date_created'],
+        },
+      ],
+    });
+
+    // Serialize data so the template can read it
+    const posts = PostData.map((posts) => posts.get({ plain: true }));
+
+    // Pass serialized data and session flag into template
+    res.render('homepage', { 
+      posts,
+      logged_in: req.session.logged_in 
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 // Use withAuth middleware to prevent access to route
 router.get('/profile', withAuth, async (req, res) => {
@@ -14,8 +49,16 @@ router.get('/profile', withAuth, async (req, res) => {
 
     const user = userData.get({ plain: true });
 
+    const posts = await Post.findAll({
+      attributes: ['id', 'headline', 'body', 'posted_by_user_id', 'date_created'],
+      where: {
+        posted_by_user_id: req.session.id
+      }
+    })
+
     res.render('profile', {
       ...user,
+      posts,
       logged_in: true
     });
   } catch (err) {
