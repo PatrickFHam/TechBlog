@@ -17,12 +17,11 @@
 </div>
 {{/each}} --}}
 <div class="container">
-  <h2>Headline:  {{post.headline}}</h2>
-  <h3>Body:</h3>
+  <h2>{{post.headline}}</h2>
   <p>{{post.body}}</p>
   <h4>--{{post.user.name}} on {{format_date post.date_created}}</h4>
   {{#each post.comments as |comment|}}
   <h5>{{comment.body}}</h5>
-  <h6>{{comment.comment_by_user_id}}</h6>
+  <h6>{{user.name}}</h6>
   {{/each}}
 </div>
