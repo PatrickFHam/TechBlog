@@ -17,6 +17,7 @@ router.get('/theblog', async (req, res) => {
   try {
     // Get all movies and JOIN with user data
     const PostData = await Post.findAll({
+      order: [['date_created', 'DESC']],
       include: [
         {
           model: Comment,
@@ -49,6 +50,8 @@ router.get('/post/:id', async (req, res) => {
       include: [
         {
           model: Comment,
+          
+          order: [['date_created', 'DESC']],
           attributes: ['body', 'comment_by_user_id', 'date_created'],
           include: [{
             model: User,
