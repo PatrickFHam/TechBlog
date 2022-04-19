@@ -1,66 +1,82 @@
 [
   {
     "body": "Comment 1 about MySQL",
-    "on_post_id": 1
+    "on_post_id": 1,
+    "comment_by_user_id": 2
   },
   {
     "body": "Comment 2 about MySQL",
-    "on_post_id": 1
+    "on_post_id": 1,
+    "comment_by_user_id": 2
   },
   {
     "body": "Comment 1 about jQuery",
-    "on_post_id": 2
+    "on_post_id": 2,
+    "comment_by_user_id": 3
   },
   {
     "body": "Comment 2 about jQuery",
-    "on_post_id": 2
+    "on_post_id": 2,
+    "comment_by_user_id": 3
   },
   {
     "body": "Comment 1 about NodeJS",
-    "on_post_id": 3
+    "on_post_id": 3,
+    "comment_by_user_id": 3
   },
   {
     "body": "Comment 2 about NodeJS",
-    "on_post_id": 3
+    "on_post_id": 3,
+    "comment_by_user_id": 3
   },
   {
     "body": "Comment 1 about Sequelize",
-    "on_post_id": 4
+    "on_post_id": 4,
+    "comment_by_user_id": 4
   },
   {
     "body": "Comment 2 about Sequelize",
-    "on_post_id": 4
+    "on_post_id": 4,
+    "comment_by_user_id": 4
   },
   {
     "body": "Comment 1 about Handlebars",
-    "on_post_id": 5
+    "on_post_id": 5,
+    "comment_by_user_id": 4
   },
   {
     "body": "Comment 2 about Handlebars",
-    "on_post_id": 5
+    "on_post_id": 5,
+    "comment_by_user_id": 4
   },
   {
     "body": "Comment 1 about BootStrap",
-    "on_post_id": 6
+    "on_post_id": 6,
+    "comment_by_user_id": 1
   },
   {
     "body": "Comment 2 about BootStrap",
-    "on_post_id": 6
+    "on_post_id": 6,
+    "comment_by_user_id": 1
   },
   {
     "body": "Comment 1 about JASS",
-    "on_post_id": 7
+    "on_post_id": 7,
+    "comment_by_user_id": 2
   },
   {
     "body": "Comment 2 about JASS",
-    "on_post_id": 7
+    "on_post_id": 7,
+    "comment_by_user_id": 2
   },
   {
     "body": "Comment 1 about CSS",
-    "on_post_id": 8
+    "on_post_id": 8,
+    "comment_by_user_id": 2
   },
   {
     "body": "Comment 2 about CSS",
-    "on_post_id": 8
+    "on_post_id": 8,
+    "comment_by_user_id": 2
   }
 ]

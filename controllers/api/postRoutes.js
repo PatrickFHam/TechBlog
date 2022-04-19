@@ -1,11 +1,12 @@
 const router = require('express').Router();
-const { Post } = require('../../models');
+const { Post, User, Comment } = require('../../models');
+const withAuth = require('../../utils/auth');
 
-router.post('/', async (req, res) => {
+router.post('/', withAuth, async (req, res) => {
   try {
     const newPost = await Post.create({
       ...req.body,
-      user_id: req.session.user_id,
+      posted_by_user_id: req.session.user_id,
     });
 
     res.status(200).json(newPost);
@@ -13,6 +14,21 @@ router.post('/', async (req, res) => {
     res.status(400).json(err);
   }
 });
+
+router.get('/all', withAuth, async (req, res) => {
+  try {
+    const allPosts = await Post.findAll();
+
+    if (!allPosts) {
+      res.status(404).json({ message: 'No posts found!' });
+      return;
+    }
+
+    res.status(200).json(allPosts);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+})
 
 router.get('/:id', async (req, res) => {
   try {
@@ -29,7 +45,12 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', withAuth, async (req, res) => {
+  console.log("Parameter ID is:");
+  console.log(req.params.id);
+  console.log("Session ID is:");
+  console.log(req.session.user_id);
+  
   try {
     const postData = await Post.destroy({
       where: {

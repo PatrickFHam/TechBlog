@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Post } = require('../models');
+const { User, Post, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
@@ -19,9 +19,13 @@ router.get('/theblog', async (req, res) => {
     const PostData = await Post.findAll({
       include: [
         {
-          model: {Post},
-          attributes: ['headline', 'body', 'date_created'],
+          model: Comment,
+          attributes: ['body'],
         },
+        {
+          model: User,
+          attributes: ['name', 'email']
+        }
       ],
     });
 
@@ -31,6 +35,39 @@ router.get('/theblog', async (req, res) => {
     // Pass serialized data and session flag into template
     res.render('homepage', { 
       posts,
+      logged_in: req.session.logged_in 
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/post/:id', async (req, res) => {
+  try {
+    // Get all movies and JOIN with user data
+    let postData = await Post.findByPk(req.params.id, {
+      include: [
+        {
+          model: Comment,
+          attributes: ['body', 'comment_by_user_id', 'date_created'],
+        },
+        {
+          model: User,
+          attributes: ['name', 'email']
+        }
+      ],
+    });
+
+    
+    // Serialize data so the template can read it
+    // const posts = PostData.map((posts) => posts.get({ plain: true }));
+    
+    let post = postData.get({ plain: true });
+    console.log(post);
+
+    // Pass serialized data and session flag into template
+    res.render('post', { 
+      post,
       logged_in: req.session.logged_in 
     });
   } catch (err) {
@@ -52,13 +89,13 @@ router.get('/profile', withAuth, async (req, res) => {
     const posts = await Post.findAll({
       attributes: ['id', 'headline', 'body', 'posted_by_user_id', 'date_created'],
       where: {
-        posted_by_user_id: req.session.id
+        posted_by_user_id: req.session.user_id
       }
     })
 
     res.render('profile', {
       ...user,
-      posts,
+      ...posts,
       logged_in: true
     });
   } catch (err) {
