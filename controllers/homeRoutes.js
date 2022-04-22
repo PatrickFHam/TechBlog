@@ -47,9 +47,8 @@ router.get('/blogpost/:id', async (req, res) => {
       include: [
         {
           model: Comment,
-          
-          order: [['date_created', 'DESC']],
           attributes: ['id', 'body', 'comment_by_user_id', 'date_created'],
+          order: [['date_created', 'DESC']],
           include: [{
             model: User,
             attributes: ['name', 'email']
@@ -96,6 +95,17 @@ router.get('/profile', withAuth, async (req, res) => {
       ...user,
       ...posts,
       logged_in: true
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/about', async (req, res) => {
+  try {
+    
+    res.render('about', {
+      logged_in: req.session.logged_in
     });
   } catch (err) {
     res.status(500).json(err);

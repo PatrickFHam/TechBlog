@@ -46,8 +46,8 @@ if (document.querySelector('.new-comment-form')) {
 };
 
 if (document.querySelector('.delete-btn')) {
-  const allDeleteButtons = document.querySelectorAll('.delete-btn');
-  allDeleteButtons.forEach(deleteButton => {
+  const allCommentDeleteButtons = document.querySelectorAll('.delete-btn');
+  allCommentDeleteButtons.forEach(deleteButton => {
     deleteButton.addEventListener('click', delCommentHandler)
   })
 };

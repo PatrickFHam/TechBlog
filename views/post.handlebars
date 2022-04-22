@@ -1,16 +1,18 @@
-<div class="container">
+<div class="container mt-5">
   <h2>{{post.headline}}</h2>
   <p>{{post.body}}</p>
-  <h4>--{{post.user.name}}, posted {{format_date post.date_created}}</h4>
+  <h6><em>--{{post.user.name}}, posted {{format_date post.date_created}}</em></h6>
+  
+  <div class="container mt-5">
   {{#each post.comments as |comment|}}
-  <h5>{{comment.body}}</h5>
+  <h6>{{comment.body}}</h6>
   
   {{#ifCondThree ...logged_in ...logged_in_user_id comment.comment_by_user_id}}
   <h6>MY comment from {{format_date comment.date_created}}</h6>
   {{/ifCondThree}}
 
   {{#ifCondFour ...logged_in ...logged_in_user_id comment.comment_by_user_id}}
-  <h6>{{user.name}} commented {{format_date comment.date_created}}</h6>
+  <p><em>--{{user.name}} commented {{format_date comment.date_created}}</em></p>
   {{/ifCondFour}}
   {{#ifCondTwo ...logged_in_user_id comment.comment_by_user_id}}
     <button id="deleteComment" class="delete-btn btn btn-danger" data-id='{{comment.id}}'>Delete My Comment</button>
@@ -19,12 +21,13 @@
     <button id="deleteComment" class="delete-btn btn btn-danger" data-id='{{comment.id}}'>Delete This Comment</button>
   {{/ifCondFive}}
   {{/each}}
+  </div>
 </div>
 {{#if logged_in}}
-<div class="container mt-5">
+<div class="container mt-1">
   <form class="form new-comment-form" data-id="{{post.id}}">
     <div class="form-group">
-      <label for="comment">Comment:</label>
+      <label for="comment">Add a New Comment:</label>
       <input class="form-input" type="text" id="comment-body" name="comment-body" />
     </div>
     <div class="form-group">

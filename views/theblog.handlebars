@@ -1,15 +1,18 @@
-<!-- Loop over each object in the projects array -->
-{{#each posts as |post| }}
-<div class="containter mx-3 my-3">
-  <div class="row mb-4 project">
-    <div class="col-md-5">
-      <h2>
-        <!-- Call helper function with triple brackets to render the emoji span as HTML -->
-        {{{get_emoji}}}
-        <a href="/blogpost/{{post.id}}">{{post.headline}}</a>
-      </h2>
-      <p>Created {{#if ...logged_in}}by {{post.user.name}} {{/if}}on {{format_date post.date_created}}</p>
-    </div>
-  </div>
+{{#unless logged_in}}
+<div class="alert alert-danger text-center" role="alert">
+  You can see all The Blog's posts, but you'll have to <a href="/profile" class="alert-link">SIGN-UP or SIGN-IN</a> to comment, post, or see others' info.
 </div>
-{{/each}}
+{{/unless}}
+
+<ul class="list-group col-6 mx-auto mt-3">
+  {{#each posts as |post| }}
+  <a href="/blogpost/{{post.id}}" class="list-group-item list-group-item-action flex-column align-items-start">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">{{post.headline}}</h5>
+      <small><span class="badge badge-success badge-pill">{{comments.length}}</span></small>
+    </div>
+    {{!-- <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p> --}}
+    <small>Created {{#if ...logged_in}}by {{post.user.name}} {{/if}}on {{format_date post.date_created}}</small>
+  </a>
+  {{/each}}
+</ul>

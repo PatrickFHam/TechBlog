@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Blog ... brought to you by the Tech Bloggers</title>
+  <title>The Blog ... brought to you by the Good Neighbors</title>
   <!-- css -->
   <link rel="stylesheet" href="/css/jass.css">
   <link rel="stylesheet" href="/css/style.css">
@@ -34,7 +34,7 @@
       <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <a class="nav-item nav-link" href="/">Home</a>
-          <a class="nav-item nav-link" href="/about">About the Team</a>
+          <a class="nav-item nav-link" target="_blank" href="https://github.com/PatrickFHam">About</a>
           <a class="nav-item nav-link" href="/theblog">The Blog</a>
           {{#if logged_in}}
           <a class="nav-item nav-link" href="/profile">Dashboard</a>
@@ -88,7 +88,7 @@
 
   </main>
   <footer>
-    <div class="footer-copyright text-center py-3">© 2022 Copyright -- The Good Neighbors</div>
+    <div class="footer-copyright text-center py-3">© 2022 -- The Good Neighbors</div>
   </footer>
   
   {{#if logged_in}}
@@ -97,51 +97,3 @@
 </body>
 
 </html>
-
-{{!--  --}}
-{{!-- 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fund My Project!</title>
-  <link rel="stylesheet" href="/css/jass.css">
-  <link rel="stylesheet" href="/css/style.css">
-</head>
-
-<body>
-  <div class="flex-column justify-space-around">
-    <header class="display-flex justify-space-between align-center p-2">
-      <h1>
-        <span role="img" aria-label="money">💸</span>
-        <a href="/">Fund My Project!</a>
-      </h1>
-      <nav>
-        <!-- Conditionally render login or logout links -->
-        {{#if logged_in}}
-        <a href="/profile">profile</a> |
-        <button class="no-button" id="logout">logout</button>
-        {{else}}
-        <a href="/login">login</a>
-        {{/if}}
-      </nav>
-    </header>
-    <main class="container container-fluid mt-5">
-      <!-- Render the sub layout -->
-      {{{ body }}}
-    </main>
-    <footer>
-      
-    </footer>
-  </div>
-
-  <!-- Render script for logged in users only -->
-  {{#if logged_in}}
-  <script src="/js/logout.js"></script>
-  {{/if}}
-</body>
-
-</html>
- --}}

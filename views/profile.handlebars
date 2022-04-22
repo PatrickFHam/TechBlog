@@ -1,44 +1,50 @@
-<div class="row">
-  <div class="col-auto">
+<div class="row mx-auto mt-3">
+  <div class="col-auto mx-auto">
     <h2>Welcome, {{name}}!</h2>
   </div>
 </div>
 
-<div class="row mt-4">
-  <div class="col-md-6">
-    <h3>Make a new Post:</h3>
+<div class="container ms-5 me-3">
+  
+  <div class="row mt-4 justify-content-around">
+    
+    <div class="col-md-5 mx-auto">
+      <h3>Make a new Post:</h3>
 
-    <form class="form new-post-form">
-      <div class="form-group">
-        <label for="post-headline">headline:</label>
-        <input class="form-input" type="text" id="post-headline" name="post-headline" />
-      </div>
-      <div class="form-group">
-        <label for="post-body">body:</label>
-        <input class="form-input" type="text" id="post-body" name="post-body" />
-      </div>
-      <div class="form-group">
-        <button type="submit" class="btn btn-primary">Create</button>
-      </div>
-    </form>
-  </div>
-
-  {{#if posts.length}}
-  <div class="col-md-6 post-list">
-    <h3>Current Posts:</h3>
-
-    {{#each posts as |post|}}
-    <div class="row mb-2">
-      <div class="col-md-8">
-        <h4><a href="/blogpost/{{post.id}}">{{post.headline}}</a></h4>
-      </div>
-      <div class="col-md-4">
-        <button class="btn btn-sm btn-danger" data-id="{{post.id}}">DELETE</button>
-      </div>
+      <form class="form new-post-form">
+        <div class="form-group">
+          <label for="post-headline">headline:</label>
+          <input class="form-input" type="text" id="post-headline" name="post-headline" />
+        </div>
+        <div class="form-group">
+          <label for="post-body">body:</label>
+          <textarea class="form-input" type="textarea" id="post-body" name="post-body" rows="3" /></textarea>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">Post This</button>
+        </div>
+      </form>
     </div>
-    {{/each}}
+
+    {{#if posts.length}}
+    <div class="col-md-5 post-list">
+      <h3>Current Posts:</h3>
+
+      {{#each posts as |post|}}
+      <div class="row justify">
+        <div class="col-8">
+          <h4><a href="/blogpost/{{post.id}}">{{post.headline}}</a></h4>
+        </div>
+        <div class="col-4 justify-content-right">
+          <button class="delete-post-btn btn btn-sm btn-danger" data-id="{{post.id}}">DELETE</button>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+    {{/if}}
+  
   </div>
-  {{/if}}
+
 </div>
 
 <script src="./js/profile.js"></script>

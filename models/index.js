@@ -9,12 +9,13 @@ User.hasMany(Post, {
 
 Post.belongsTo(User, {
   foreignKey: 'posted_by_user_id',
-  constraints: false
+  constraints: false,
 });
 
 Post.hasMany(Comment, {
   foreignKey: 'on_post_id',
-  constraints: false
+  constraints: false,
+  onDelete: 'cascade'
 });
 
 Comment.belongsTo(Post, {
