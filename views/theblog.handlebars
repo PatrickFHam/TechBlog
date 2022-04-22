@@ -6,9 +6,9 @@
       <h2>
         <!-- Call helper function with triple brackets to render the emoji span as HTML -->
         {{{get_emoji}}}
-        <a href="/post/{{post.id}}">{{post.headline}}</a>
+        <a href="/blogpost/{{post.id}}">{{post.headline}}</a>
       </h2>
-      <p>Created by {{post.user.name}} on {{format_date post.date_created}}</p>
+      <p>Created {{#if ...logged_in}}by {{post.user.name}} {{/if}}on {{format_date post.date_created}}</p>
     </div>
   </div>
 </div>

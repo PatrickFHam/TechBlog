@@ -2,20 +2,7 @@ const router = require('express').Router();
 const { Post, User, Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
-router.post('/', async (req, res) => {
-  try {
-    const newPost = await Post.create({
-      ...req.body,
-      posted_by_user_id: req.session.user_id,
-    });
-
-    res.status(200).json(newPost);
-  } catch (err) {
-    res.status(400).json(err);
-  }
-});
-
-router.get('/all', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const allPosts = await Post.findAll();
 
@@ -30,14 +17,30 @@ router.get('/all', async (req, res) => {
   }
 })
 
+
 router.get('/:id', async (req, res) => {
   try {
-    const postData = await Post.findByPk(req.params.id);
+    let postData = await Post.findByPk(req.params.id, {
+      include: [
+        {
+          model: Comment,
+          
+          order: [['date_created', 'DESC']],
+          attributes: ['body', 'comment_by_user_id', 'date_created'],
+          include: [{
+            model: User,
+            attributes: ['name', 'email']
+          }]
+        },
+        {
+          model: User,
+          attributes: ['name', 'email']
+        }
+      ],
+    });
 
-    if (!postData) {
-      res.status(404).json({ message: 'No post found with this id!' });
-      return;
-    }
+    let post = postData.get({ plain: true });
+    console.log(post);
 
     res.status(200).json(postData);
   } catch (err) {
@@ -45,7 +48,22 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.delete('/:id', withAuth, async (req, res) => {
+
+router.post('/', async (req, res) => {
+  try {
+    const newPost = await Post.create({
+      ...req.body,
+      posted_by_user_id: req.session.user_id,
+    });
+
+    res.status(200).json(newPost);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
+
+router.delete('/:id', async (req, res) => {
   
   try {
     const postData = await Post.destroy({

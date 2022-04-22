@@ -30,17 +30,17 @@ const delButtonHandler = async (event) => {
     });
 
     if (response.ok) {
-      document.location.replace('/profile');
+      document.location.reload();
     } else {
       alert('Failed to delete post');
     }
   }
 };
 
-document
-  .querySelector('.new-post-form')
-  .addEventListener('submit', newFormHandler);
+if (document.querySelector('.new-post-form')) {
+  document.querySelector('.new-post-form').addEventListener('submit', newFormHandler);
+};
 
-document
-  .querySelector('.post-list')
-  .addEventListener('click', delButtonHandler);
+if (document.querySelector('.post-list')) {
+  document.querySelector('.post-list').addEventListener('click', delButtonHandler);
+};
