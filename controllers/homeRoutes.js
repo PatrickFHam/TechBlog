@@ -2,6 +2,7 @@ const router = require('express').Router();
 const { User, Post, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
+// Renders the landing page.
 router.get('/', async (req, res) => {
   try {
     
@@ -13,6 +14,7 @@ router.get('/', async (req, res) => {
   }
 });
 
+// Renders the main page, available is the list of blog posts and number of comments.
 router.get('/theblog', async (req, res) => {
   try {
     const PostData = await Post.findAll({
@@ -41,6 +43,7 @@ router.get('/theblog', async (req, res) => {
   }
 });
 
+// Renders a single blog post and its comments.
 router.get('/blogpost/:id', async (req, res) => {
   try {
     let postData = await Post.findByPk(req.params.id, {
@@ -74,6 +77,7 @@ router.get('/blogpost/:id', async (req, res) => {
   }
 });
 
+// Renders the user's dashboard.
 router.get('/profile', withAuth, async (req, res) => {
   try {
   
@@ -101,6 +105,7 @@ router.get('/profile', withAuth, async (req, res) => {
   }
 });
 
+// Renders the about page.
 router.get('/about', async (req, res) => {
   try {
     
@@ -112,6 +117,7 @@ router.get('/about', async (req, res) => {
   }
 });
 
+// Renders the Login page.
 router.get('/login', (req, res) => {
   if (req.session.logged_in) {
     res.redirect('/profile');

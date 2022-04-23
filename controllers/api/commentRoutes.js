@@ -3,6 +3,7 @@ const { Post, User, Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 
+// Returns All Comments
 router.get('/', async (req, res) => {
   try {
     const allCommentsData = await Comment.findAll();
@@ -18,7 +19,7 @@ router.get('/', async (req, res) => {
   }
 })
 
-
+// Returns a spefific comment.
 router.get('/:id', async (req, res) => {
   try {
     const oneCommentData = await Comment.findOne({
@@ -38,7 +39,7 @@ router.get('/:id', async (req, res) => {
   }
 })
 
-
+// Returns all comments from a specific user.
 router.get('/fromuser/:comments_from_user_id', async (req, res) => {
   try {
     const commentsFromOneUserData = await Comment.findAll({
@@ -58,7 +59,7 @@ router.get('/fromuser/:comments_from_user_id', async (req, res) => {
   }
 })
 
-
+// Returns all the comments for one post.
 router.get('/foronepost/:comments_for_one_post', async (req, res) => {
   try {
     const commentsFromOnePost = await Comment.findAll({
@@ -88,7 +89,7 @@ router.get('/foronepost/:comments_for_one_post', async (req, res) => {
   }
 })
 
-
+// Adds a new comment.
 router.post('/', async (req, res) => {
   console.log("logged in user id is:");
   console.log(req.session.user_id);
@@ -110,7 +111,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-
+// Deletes a specific comment.
 router.delete('/:id', async (req, res) => {
   
   try {
