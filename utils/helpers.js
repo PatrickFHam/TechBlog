@@ -7,18 +7,7 @@ module.exports = {
     // format large numbers with commas
     return parseInt(amount).toLocaleString();
   },
-  get_emoji: () => {
-    const randomNum = Math.random();
-
-    // Return a random emoji
-    if (randomNum > 0.7) {
-      return `<span for="img" aria-label="lightbulb">💡</span>`;
-    } else if (randomNum > 0.4) {
-      return `<span for="img" aria-label="laptop">💻</span>`;
-    } else {
-      return `<span for="img" aria-label="gear">⚙️</span>`;
-    }
-  },
+  
   ifCond: (v1, operator, v2, options) => {
     switch (operator) {
       case '==':
@@ -46,18 +35,24 @@ module.exports = {
   }
   },
 
+  // These IF CONDITIONS are for slightly more complex HandleBars mechanics.
+
+  // If the comment belongs to the logged-in user.
   ifCondTwo: (v1, v2, options) => {
     return (v1 == v2) ? options.fn(this) : options.inverse(this);
   },
 
+  // If the comment belongs to the logged-in user.
   ifCondThree: (v1, v2, v3, options) => {
     return (v1 && v2 == v3) ? options.fn(this) : options.inverse(this);
   },
   
+  // If the comment belongs to a diffferent user.
   ifCondFour: (v1, v2, v3, options) => {
     return (v1 && v2 !== v3) ? options.fn(this) : options.inverse(this);
   },
 
+  // If the post belongs to the logged-in user, they may delete the comment.
   ifCondFive: (v1, v2, v3, options) => {
     return (v1 && v2 == v3) ? options.fn(this) : options.inverse(this);
   },
