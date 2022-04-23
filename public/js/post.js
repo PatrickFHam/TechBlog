@@ -1,3 +1,4 @@
+// Function to add a new Blog Post
 const newFormHandler = async (event) => {
   event.preventDefault();
 
@@ -21,6 +22,7 @@ const newFormHandler = async (event) => {
   }
 };
 
+// Function to delete a Blog post.
 const delButtonHandler = async (event) => {
   if (event.target.hasAttribute('data-id')) {
     const id = event.target.getAttribute('data-id');
@@ -37,10 +39,12 @@ const delButtonHandler = async (event) => {
   }
 };
 
+// Only adds the button event listener, if the button exists, rendered by Handlebars.
 if (document.querySelector('.new-post-form')) {
   document.querySelector('.new-post-form'.addEventListener('submit', newFormHandler))
 };
   
+// Only adds the button event listener, if the button exists, rendered by Handlebars.
 if (document.querySelector('.post-list')) {
   document.querySelector('.post-list').addEventListener('click', delButtonHandler);
 };

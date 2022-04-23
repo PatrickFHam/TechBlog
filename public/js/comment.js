@@ -1,11 +1,9 @@
+// Function to add a new Comment.
 const newCommentHandler = async (event) => {
   event.preventDefault();
 
   const body = document.querySelector('#comment-body').value.trim();
   let on_post_id = event.target.getAttribute('data-id');
-
-  console.log(body);
-  console.log(on_post_id);
 
   if (body && on_post_id) {
     const response = await fetch(`/api/comments`, {
@@ -24,6 +22,7 @@ const newCommentHandler = async (event) => {
   }
 };
 
+// Function to delete a specific comment.
 const delCommentHandler = async (event) => {
   if (event.target.hasAttribute('data-id')) {
     const id = event.target.getAttribute('data-id');
@@ -41,10 +40,12 @@ const delCommentHandler = async (event) => {
   }
 };
 
+// Only adds the button event listener, if the button exists, rendered by Handlebars.
 if (document.querySelector('.new-comment-form')) {
   document.querySelector('.new-comment-form').addEventListener('submit', newCommentHandler);
 };
 
+// Only adds the button event listener, if the button exists, rendered by Handlebars.
 if (document.querySelector('.delete-btn')) {
   const allCommentDeleteButtons = document.querySelectorAll('.delete-btn');
   allCommentDeleteButtons.forEach(deleteButton => {

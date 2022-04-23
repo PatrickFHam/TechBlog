@@ -1,3 +1,4 @@
+// Function to add a new Post from the profile page.
 const newFormHandler = async (event) => {
   event.preventDefault();
 
@@ -21,20 +22,16 @@ const newFormHandler = async (event) => {
   }
 };
 
+// Function to delete a specific post from the profile page.
 const delPostHandler = async (event) => {
-
-  console.log(event.target.getAttribute('data-id'));
 
   if (event.target.hasAttribute('data-id')) {
     let id = event.target.getAttribute('data-id');
-
-    console.log(id);
 
     const response = await fetch(`/api/posts/${id}`, {
       method: 'DELETE',
     });
 
-    console.log(response);
 
     if (response.ok) {
       document.location.reload();
@@ -44,8 +41,10 @@ const delPostHandler = async (event) => {
   }
 };
 
+// Event listener for the "create new post" button.
 document.querySelector('.new-post-form').addEventListener('submit', newFormHandler);
 
+// Only adds the button event listener, if the button exists, rendered by Handlebars.
 if (document.querySelector('.delete-post-btn')) {
   const allPostDeleteButtons = document.querySelectorAll('.delete-post-btn');
   allPostDeleteButtons.forEach(deleteButton => {
